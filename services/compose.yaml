@@ -7,7 +7,7 @@ services:
     volumes:
       - ./tmbo/:/var/www/html
   php:
-    build: ./tmbo/
+    build: ./web/
     container_name: php
     expose:
       - 9000
