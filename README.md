@@ -1,8 +1,19 @@
-This Might Be Offensive
+this might be offensive
 =======================
 
 Getting Started
 ---------------
+
+Using Docker (Recommended) - WIP
+--------------------------------
+
+1. Install [docker and docker-compose](https://docs.docker.com/get-started/get-docker/).
+1. `git clone git@github.com:rayhatfield/this-might-be-offensive.git`
+1. `cd this-might-be-offensive`
+1. `docker compose up`
+
+Using Vagrant
+-------------
 
 1. Install vagrant and virtualbox. If you're on a Mac: `brew install Caskroom/cask/vagrant Caskroom/cask/virtualbox`
 2. `git clone git@github.com:numist/this-might-be-offensive.git`
