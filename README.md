@@ -9,7 +9,7 @@ Using Docker (Recommended) - WIP
 
 1. Install [docker and docker-compose](https://docs.docker.com/get-started/get-docker/).
 1. `git clone git@github.com:rayhatfield/this-might-be-offensive.git`
-1. `cd this-might-be-offensive`
+1. `cd this-might-be-offensive/services`
 1. `docker compose up`
 
 Using Vagrant
