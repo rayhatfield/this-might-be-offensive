@@ -15,26 +15,27 @@ $link = null;
 $redis = null;
 
 // Generic database connection function
-function openDbConnection() {
+function openDbConnection() {		
 		global $config, $link, $redis;
 
 		// If there isn't $link currently, then open up the connection, if it fails then forward the user
 		// to the out of order URL.
 		if( !$link ) {
-			if(!($link = mysql_pconnect($config["database_host"],$config["database_user"],$config["database_pass"]))) {
-				trigger_error(mysql_error(), E_USER_ERROR);
+
+			if(!($link = mysqli_connect($config["database_host"],$config["database_user"],$config["database_pass"]))) {
+				trigger_error(mysqli_connect_error(), E_USER_ERROR);
 			}
 			
 			// We got a connection, so now select our database, or again forward to the out of order URL.
-			if(!mysql_select_db($config["database_name"],$link)) {
-				trigger_error(mysql_error(), E_USER_ERROR);
+			if(!mysqli_select_db($link, $config["database_name"])) {
+				trigger_error(mysqli_connect_error(), E_USER_ERROR);
 			}
 		}
 		
 		// Overloading this into the db connect since the combination is our "database"
-		if(!$redis) {
-			$redis = new Predis\Client();
-		}
+		// if(!$redis) {
+		// 	$redis = new Predis\Client();
+		// }
 		return $link;		
 }
 ?>

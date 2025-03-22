@@ -56,7 +56,7 @@
 		$filter .= me()->getPref("hide_tmbo") ? " AND tmbo = 0" : "";
 		$sql = "SELECT id FROM offensive_uploads WHERE type='".$upload->type()."' AND status='normal' AND id < ".min($pickuplinks).$filter." ORDER BY RAND() LIMIT 1";
 		$res = tmbo_query($sql);
-		$row = mysql_fetch_assoc( $res );
+		$row = mysqli_fetch_assoc( $res );
 		return($row['id']);
 	}
 

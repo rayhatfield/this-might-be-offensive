@@ -5,25 +5,28 @@ services:
     ports:
       - 80:80
     volumes:
-      - ./tmbo/:/var/www/html
+      - ./web/src/:/var/www/html
   php:
     build: ./web/
     container_name: php
     expose:
       - 9000
     volumes:
-      - ./tmbo/:/var/www/html
+      - ./web/src/:/var/www/html
   db:
     image: mysql
     restart: always
     container_name: db
     environment:
-      MYSQL_ROOT_PASSWORD: example
-      MYSQL_DATABASE: test
+      MYSQL_ROOT_PASSWORD: shortbus
+      MYSQL_DATABASE: tmbo
+      MYSQL_USER: tmbo
+      MYSQL_PASSWORD: shortbus
     ports:
       - "3306:3306"
     volumes:
-      - ./mysql:/var/lib/mysql
+      - ./temp/mysql:/var/lib/mysql
+      - ./data/db-setup:/docker-entrypoint-initdb.d
   # web:
   #   image: php:7.2-apache
   #   ports:

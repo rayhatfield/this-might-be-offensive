@@ -1,11 +1,12 @@
 <?
 
 function sqlEscape($string) {
+	global $link;
 	if(ini_get("magic_quotes_gpc")) {
 		$string = str_replace( "\\'", "'", $string );
 		$string = str_replace( '\\"', '"', $string );
 	}
-	return mysql_real_escape_string($string);
+	return mysqli_real_escape_string($link, $string);
 }
 
 function htmlEscape($string) {

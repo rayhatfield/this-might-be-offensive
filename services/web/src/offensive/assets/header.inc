@@ -32,11 +32,11 @@ if(substr($_SERVER["HTTP_HOST"], 0, 4) == "www.") {
 }
 
 // force ssl.
-if(!ssl()) {
-	// TODO: if a token was present in the URI, it should be invalidated.
-	header("Location: https://".$_SERVER["HTTP_HOST"].$_SERVER["REQUEST_URI"], 301);
-	exit;
-}
+// if(!ssl()) {
+// 	// TODO: if a token was present in the URI, it should be invalidated.
+// 	header("Location: https://".$_SERVER["HTTP_HOST"].$_SERVER["REQUEST_URI"], 301);
+// 	exit;
+// }
 
 /*  _                   _
  * | | ___   __ _  __ _(_)_ __   __ _
@@ -193,8 +193,8 @@ function tmbo_query($sql, $timeout=2) {
 
 	time_start($time);
 		
-	$result = mysql_query($sql, $link) or 
-		tmbo_error_handler(E_USER_ERROR, mysql_error()." query '$sql'", 
+	$result = mysqli_query($link, $sql) or 
+		tmbo_error_handler(E_USER_ERROR, mysqli_error($link)." query '$sql'", 
 		                   $trace['file'], $trace['line'], null);
 	$time = time_end($time);
 	$querytime += $time;

@@ -113,9 +113,9 @@
 									if( me()->status() == "admin" ) {
 										$sql = "SELECT DISTINCT * FROM users WHERE last_login_ip = '$ip' AND userid != $usrid" ;
 										$result = tmbo_query( $sql );
-										if( mysql_num_rows( $result ) > 0 ) {
+										if( mysqli_num_rows( $result ) > 0 ) {
 											?><br/>Other users with the same ip:<br/><?
-											while( $row = mysql_fetch_assoc( $result ) ) {
+											while( $row = mysqli_fetch_assoc( $result ) ) {
 												echo id(new User($row))->htmlUsername()."<br/>";
 											}
 										}
@@ -230,7 +230,7 @@ function recentComments( $uid ) {
 	
 	$seen = array();
 	$count = 0;
-	while( false !== ($row = mysql_fetch_assoc( $result )) && $count < 15) {
+	while( false !== ($row = mysqli_fetch_assoc( $result )) && $count < 15) {
 		$upload = new Upload($row);
 		
 		if(array_key_exists($upload->id(), $seen)) continue;

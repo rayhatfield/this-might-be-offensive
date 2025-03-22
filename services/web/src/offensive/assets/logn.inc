@@ -130,7 +130,7 @@ function canLogIn() {
 	$sql = "SELECT count( id ) as numFailed from failed_logins WHERE ip='$ip' AND timestamp > date_sub( now(), interval 30 minute )";
 	$result = tmbo_query( $sql );
 
-	$row = @mysql_fetch_assoc( $result );
+	$row = @mysqli_fetch_assoc( $result );
 
 	if( $row['numFailed'] > 5 ) {
 		return false;
@@ -244,8 +244,8 @@ function loginWithCookie() {
 		if(is_intger($uid)) {
 			$sql = "SELECT * from users where userid=$uid LIMIT 1";
 			$result = tmbo_query( $sql );
-			if(mysql_num_rows( $result ) == 1) {
-				$row = mysql_fetch_assoc($result);
+			if(mysqli_num_rows( $result ) == 1) {
+				$row = mysqli_fetch_assoc($result);
 				$cookiehash = tmbohash($row['userid'], $row['username'].$salt);
 				if($cookiehash == $_COOKIE['remember']) {
 					return logInUser(new User($row));
@@ -270,8 +270,8 @@ function loginWithUserPass($params) {
    	$encrypted_pw = sha1( $pw );
 		$query = "SELECT userid FROM users WHERE username = '" . sqlEscape($name) . "' AND password = '" . $encrypted_pw . "'";
 		$result = tmbo_query($query);
-		if(mysql_num_rows($result) > 0) {
-			$userid = array_top(mysql_fetch_assoc($result));
+		if(mysqli_num_rows($result) > 0) {
+			$userid = array_top(mysqli_fetch_assoc($result));
 
 			if(logInUser(new User($userid))) {
 				// set rememberme cookie if the user requested it

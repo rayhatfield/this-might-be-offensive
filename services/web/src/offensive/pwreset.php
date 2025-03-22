@@ -33,8 +33,8 @@
 		$username = sqlEscape( $username );
 		$sql = "SELECT * FROM users WHERE username='$username'";
 		$result = tmbo_query( $sql );
-		if( mysql_num_rows( $result ) == 1 ) {
-			$row = mysql_fetch_assoc( $result );
+		if( mysqli_num_rows( $result ) == 1 ) {
+			$row = mysqli_fetch_assoc( $result );
 			$code = hashFromUserRow( $row );
 			$message = "Someone (hopefully you) wants to reset your [this might be offensive] password. To reset your password, please visit the following link:
 
@@ -125,8 +125,8 @@ https://".$_SERVER['HTTP_HOST']."/offensive/pwreset.php?x=$code
 		if( is_intger( $id ) && $id > 1 ) {
 			$sql = "SELECT * FROM users WHERE userid = $id";
 			$result = tmbo_query( $sql );
-			if( mysql_num_rows( $result ) == 1 ) {
-				$row = mysql_fetch_assoc( $result );
+			if( mysqli_num_rows( $result ) == 1 ) {
+				$row = mysqli_fetch_assoc( $result );
 				$hash = hashFromUserRow( $row );
 				if( $hash == $code ) {
 					return $row;

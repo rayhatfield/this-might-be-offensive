@@ -9,3 +9,4 @@ admin/certificates
 *.swp
 todo.txt
 .vagrant/
+temp/
