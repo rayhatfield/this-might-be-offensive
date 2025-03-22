@@ -14,9 +14,9 @@
 	
 	$result = tmbo_query( $sql );
 	
-	if( mysql_num_rows( $result ) == 1 ) {
+	if( mysqli_num_rows( $result ) == 1 ) {
 		
-		$row = mysql_fetch_assoc( $result );
+		$row = mysqli_fetch_assoc( $result );
 		
 		$email = $row['email'];
 		$username = $row['username'];		

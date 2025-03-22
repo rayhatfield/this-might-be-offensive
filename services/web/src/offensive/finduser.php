@@ -11,7 +11,7 @@
 	$result = tmbo_query($sql);
 	$row = mysql_fetch_array( $result );
 
-	if( mysql_num_rows( $result ) == 1 ) {
+	if( mysqli_num_rows( $result ) == 1 ) {
 		header("Location: ".Link::user($row['userid']));
 	}
 	else {

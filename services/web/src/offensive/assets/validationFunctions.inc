@@ -15,7 +15,7 @@
 
 		$sql = "SELECT count(*) AS theCount FROM users WHERE email = '" . $email . "'";
 		$result = tmbo_query( $sql );
-		$row = mysql_fetch_assoc( $result );
+		$row = mysqli_fetch_assoc( $result );
 		if( $row['theCount'] > 0 ) {
 			return new statusMessage( false, "An account with that email address already exists." );
 		}

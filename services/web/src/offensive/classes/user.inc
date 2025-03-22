@@ -52,10 +52,10 @@ class User {
 			$result = tmbo_query($sql);
 
 			// if the upload doesn't exist...  well what can we do?
-			if(mysql_num_rows($result) != 1) {
+			if(mysqli_num_rows($result) != 1) {
 				$this->data['exists'] = false;
 			} else {
-				$row = mysql_fetch_assoc($result);
+				$row = mysqli_fetch_assoc($result);
 				foreach($row as $key => $val) {
 					$this->data[$key] = $val;
 				}
@@ -149,8 +149,8 @@ class User {
 			$sql = "SELECT * FROM users WHERE referred_by = ".$this->data["userid"]. "
 			        AND userid != ".$this->data["userid"];
 			$result = tmbo_query($sql);
-			if(mysql_num_rows($result) != 0) {
-				while(false !== ($row = mysql_fetch_assoc($result))) {
+			if(mysqli_num_rows($result) != 0) {
+				while(false !== ($row = mysqli_fetch_assoc($result))) {
 					if($row['userid'] != $this->id()) {
 						$this->data["posse"][] = new User($row);
 					}
@@ -193,10 +193,10 @@ class User {
 			       " ORDER BY timestamp DESC LIMIT 1";
 			$result = tmbo_query($sql);
 
-			if(mysql_num_rows($result) !== 1)
+			if(mysqli_num_rows($result) !== 1)
 				$this->data["yearbook"] = false;
 			else {
-				$row = mysql_fetch_assoc($result);
+				$row = mysqli_fetch_assoc($result);
 				$this->data["yearbook"] = new Upload($row["id"]);
 			}
 		}
@@ -395,12 +395,12 @@ class User {
 		// memoize self
 		if(me() && me()->id() == $this->id()) {
 			if(!array_key_exists("subscribed:".$upload->id(), $this->data)) {
-				$this->data["subscribed:".$upload->id()] = mysql_num_rows(tmbo_query($sql)) > 0 ? true : false;
+				$this->data["subscribed:".$upload->id()] = mysqli_num_rows(tmbo_query($sql)) > 0 ? true : false;
 			}
 			return $this->data["subscribed:".$upload->id()];
 		}
 
-		return mysql_num_rows(tmbo_query($sql)) > 0 ? true : false;
+		return mysqli_num_rows(tmbo_query($sql)) > 0 ? true : false;
 	}
 
 	public function subscribe($upload) {
@@ -478,11 +478,11 @@ class User {
 		// memoize self
 		if(me() && me()->id() == $this->id()) {
 			if(!array_key_exists(__FUNCTION__.":".$upload->id(), $this->data)) {
-				$this->data[__FUNCTION__.":".$upload->id()] = (mysql_num_rows(tmbo_query($sql)) > 0);
+				$this->data[__FUNCTION__.":".$upload->id()] = (mysqli_num_rows(tmbo_query($sql)) > 0);
 			}
 			return $this->data[__FUNCTION__.":".$upload->id()];
 		}
-		return (mysql_num_rows(tmbo_query($sql)) > 0);
+		return (mysqli_num_rows(tmbo_query($sql)) > 0);
 	}
 
 	public function canVote($upload) {

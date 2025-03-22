@@ -58,7 +58,7 @@ function numUploadsToday() {
 	if(!me()) return 0;
 	$sql = "SELECT count( id ) as thecount FROM offensive_uploads WHERE userid = ".me()->id()." AND timestamp > DATE_SUB( NOW(), INTERVAL 1 DAY ) AND type='image'";
 	$result = tmbo_query( $sql );
-	$row = mysql_fetch_assoc( $result );
+	$row = mysqli_fetch_assoc( $result );
 	return $row[ 'thecount' ];
 }
 
@@ -91,7 +91,7 @@ function numAllowedUploads() {
 	$good = 0;
 	$bad = 0;
 
-	while( $row = mysql_fetch_assoc( $result ) ) {
+	while( $row = mysqli_fetch_assoc( $result ) ) {
 		switch( $row['vote'] ) {
 			case "this is good":
 				$good += $row['thecount'];
@@ -899,7 +899,7 @@ function upload_checkisk(&$postdata) {
 			
 	$result = tmbo_query( $sql );
 	
-	if( mysql_num_rows( $result ) == 0 ) return false;
+	if( mysqli_num_rows( $result ) == 0 ) return false;
 	
 	?>
 <div class="contentbox">
@@ -910,7 +910,7 @@ function upload_checkisk(&$postdata) {
 	Your file looks similar to:
 	<br /><center>
 	<table><?	
-	while($row = mysql_fetch_assoc($result)) {
+	while($row = mysqli_fetch_assoc($result)) {
 		$upload = new Upload($row);
 		$css = (isset($css) && $css == "even_row") ? "odd_row" : "even_row";
 		
@@ -969,7 +969,7 @@ function upload_checkrepost(&$postdata) {
 			WHERE hash = '".$postdata['hash']."' AND type = '".upload_type($postdata)."'
 			ORDER by timestamp DESC";
 	$result = tmbo_query( $sql );
-	if( mysql_num_rows( $result ) == 0 ) return false;
+	if( mysqli_num_rows( $result ) == 0 ) return false;
 
 	$filePath=dirname(realpath($_SERVER['SCRIPT_FILENAME']));
 
@@ -982,7 +982,7 @@ function upload_checkrepost(&$postdata) {
 	Your file appears to be a repost of:
 	<br /><center>
 	<table><?
-	while($row = mysql_fetch_assoc($result)) {
+	while($row = mysqli_fetch_assoc($result)) {
 		$upload = new Upload($row);
 		$css = (isset($css) && $css == "even_row") ? "odd_row" : "even_row";
 

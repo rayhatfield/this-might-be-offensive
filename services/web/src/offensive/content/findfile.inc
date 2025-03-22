@@ -49,11 +49,11 @@
 
 
 <?
-		if( mysql_num_rows( $result ) == 0 ) {
+		if( mysqli_num_rows( $result ) == 0 ) {
 			echo "<div class=\"piletitle\">No dice, but thanks for playing.</div>";
 		}
 		
-		while( $row = mysql_fetch_assoc( $result ) ) {
+		while( $row = mysqli_fetch_assoc( $result ) ) {
 			$style = (isset($style) && $style == "") ? "background:#bbbbee;" : "";
 			$css = (isset($css) && $css == "evenfile") ? "oddfile" : "evenfile";
 			
@@ -105,7 +105,7 @@
 		</td>
 		<td></td>
 		<td style="text-align:right">
-			<? if( mysql_num_rows( $result ) == $numPerPage ) { ?>
+			<? if( mysqli_num_rows( $result ) == $numPerPage ) { ?>
 				<a href="<?= $_SERVER['PHP_SELF'] ?>?c=<?= $_REQUEST['c'] ?>&findfile=<?= urlencode($_REQUEST['findfile']) ?>&p=<?= $page + 1 ?>"><b>next page</b></a> &raquo;
 			<? } ?>
 		</td>

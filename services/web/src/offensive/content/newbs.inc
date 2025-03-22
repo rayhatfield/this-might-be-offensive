@@ -12,17 +12,17 @@
 	function body() {
 ?>
 <div class="contentbox">
-	<div class="blackbar"></div>
-	<div class="heading">fresh meat.</div>
-<?
+  <div class="blackbar"></div>
+  <div class="heading">fresh meat.</div>
+  <?
 		tabs();
 ?>
-		<div class="bluebox">
-			<? newbs(); ?>
-		</div>
-		<div class="blackbar"></div>
-	</div>
-		
+  <div class="bluebox">
+    <? newbs(); ?>
+  </div>
+  <div class="blackbar"></div>
+</div>
+
 <?
 	}
 
@@ -31,8 +31,7 @@
 ?>
 
 <table width="100%">
-
-<?
+  <?
 
 		$numPerPage = 100;
 		$page = array_key_exists("p", $_REQUEST) ? $_REQUEST['p'] : 0;
@@ -57,31 +56,33 @@
 		$result = tmbo_query($sql);
 
 ?>
-				<tr style="background:#bbbbee;">
-					<td><div class="clipper">newb</div></td>
-					<td>joined</td>
-					<td style="text-align:right;white-space:nowrap">thanks to</td>
-				</tr>
-<?
+  <tr style="background: #bbbbee">
+    <td><div class="clipper">newb</div></td>
+    <td>joined</td>
+    <td style="text-align: right; white-space: nowrap">thanks to</td>
+  </tr>
+  <?
 
-		while( $row = mysql_fetch_assoc( $result ) ) {
+		while( $row = mysqli_fetch_assoc( $result ) ) {
 			$newb = new User($row);
 			$css = (isset($css) && $css == "even_row") ? "odd_row" : "even_row";
 
 			?>
-				<tr class="<?= $css ?>">
-				<td><div class="clipper"><?= $newb->htmlUsername() ?></div></td>
-					<td><?= $newb->created() ?></td>
-					<td style="text-align:right;white-space:nowrap"><?= $newb->referred_by()->htmlUsername() ?></td>
-				</tr>
-			<?
+  <tr class="<?= $css ?>">
+    <td>
+      <div class="clipper"><?= $newb->htmlUsername() ?></div>
+    </td>
+    <td><?= $newb->created() ?></td>
+    <td style="text-align: right; white-space: nowrap">
+      <?= $newb->referred_by()->htmlUsername() ?>
+    </td>
+  </tr>
+  <?
 		}
 
 		
 		?>
-
-	</table>
-
+</table>
 
 <?
 	}

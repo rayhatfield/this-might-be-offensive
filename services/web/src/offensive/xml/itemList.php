@@ -34,7 +34,7 @@ header( "Content-type: text/xml" ); ?>
 
 	$result = mysql_query( $sql );
 
-	while( $row = mysql_fetch_assoc( $result ) ) {
+	while( $row = mysqli_fetch_assoc( $result ) ) {
 	
 		$nsfw = $row['nsfw'] == 1 ? "[nsfw]" : "";
 		

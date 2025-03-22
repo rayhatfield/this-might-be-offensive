@@ -23,17 +23,16 @@
 		
 		?>
 <div class="contentbox">
-	<div class="blackbar"></div>
-	<div class="heading">who loves ya, baby?</div>
-	<? tabs(); ?>
-	<div class="bluebox">
-	<table border="0" width="100%">
-	
-		<?
+  <div class="blackbar"></div>
+  <div class="heading">who loves ya, baby?</div>
+  <? tabs(); ?>
+  <div class="bluebox">
+    <table border="0" width="100%">
+      <?
 			$good = 0;
 			$bad = 0;
 			$username = "";
-			while( $row = mysql_fetch_assoc( $result ) ) {
+			while( $row = mysqli_fetch_assoc( $result ) ) {
 				if( $row['username'] != $username && $username != "" ) {
 					emitRow( $username, $good, $bad );
 					$good = 0;
@@ -54,22 +53,21 @@
 	
 			}
 		?>
-		
-	</table>
-	</div>
-	<div class="blackbar"></div>
+    </table>
+  </div>
+  <div class="blackbar"></div>
 </div>
-		<?
+<?
 	}
 
 	function emitRow( $name, $good, $bad ) {
 	?>
-		<tr class="<?= nextStyle() ?>">
-			<td><?= $name ?></td>
-			<td style="text-align:right">+<?= $good ?></td>
-			<td style="text-align:right">-<?= $bad ?></td>
-		</tr>
-	<?
+<tr class="<?= nextStyle() ?>">
+  <td><?= $name ?></td>
+  <td style="text-align: right">+<?= $good ?></td>
+  <td style="text-align: right">-<?= $bad ?></td>
+</tr>
+<?
 	}
 	
 	function nextStyle() {
