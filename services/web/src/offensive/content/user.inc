@@ -230,7 +230,7 @@ function recentComments( $uid ) {
 	
 	$seen = array();
 	$count = 0;
-	while( false !== ($row = mysqli_fetch_assoc( $result )) && $count < 15) {
+	while( null !== ($row = mysqli_fetch_assoc( $result )) && $count < 15) {
 		$upload = new Upload($row);
 		
 		if(array_key_exists($upload->id(), $seen)) continue;
@@ -280,7 +280,7 @@ function handleSetStatusSubmission() {
 function setStatusForm( $id, $status, $email ) {
 	$sql = "SHOW COLUMNS FROM users LIKE 'account_status'";
 	$result = tmbo_query( $sql );
-	$row = mysql_fetch_row($result);
+	$row = mysqli_fetch_row($result);
 	$options = explode("','",preg_replace("/(enum|set)\('(.+?)'\)/","\\2",$row[1]));
 	
 	?>

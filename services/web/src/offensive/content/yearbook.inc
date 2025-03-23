@@ -14,7 +14,7 @@
 		$sql = "SELECT timestamp FROM offensive_uploads	WHERE type='avatar'
 		        ORDER BY timestamp DESC LIMIT 1";
 		$result = tmbo_query($sql);
-		$tstamp = mysql_fetch_array($result);
+		$tstamp = mysqli_fetch_array($result);
 		require_once("offensive/assets/conditionalGet.inc");
 		conditionalGet(strtotime($tstamp[0]));
 	}

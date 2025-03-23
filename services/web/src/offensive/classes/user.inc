@@ -119,7 +119,7 @@ class User {
 
 	public function referred_by() {
 		$referrer = $this->getUserRow("referred_by");
-		if($referrer == 0 || referrer == $this->data["userid"]) {
+		if($referrer == 0 || $referrer == $this->data["userid"]) {
 			return false;
 		}
 		return new User($referrer);
