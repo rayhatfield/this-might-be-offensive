@@ -432,7 +432,7 @@ $timelimit = 10;
 		// get the total number of users online
 		$sql = "SELECT COUNT(*) FROM users WHERE timestamp > DATE_SUB( now( ) , INTERVAL $timelimit MINUTE)";
 		$result = tmbo_query($sql);
-		list($nonline) = mysql_fetch_array($result);
+		list($nonline) = mysqli_fetch_array($result);
 
 		// start us off. ?>
 	<div class="contentbox">
@@ -444,7 +444,7 @@ $timelimit = 10;
 				// list out the latest people to do something
 				$sql = "SELECT * FROM users WHERE timestamp > DATE_SUB( now( ) , INTERVAL $timelimit MINUTE) && userid != $uid ORDER BY timestamp DESC LIMIT $userlimit";
 				$result = tmbo_query($sql);
-				while(false !== ($row = mysql_fetch_array($result))) {
+				while(null !== ($row = mysqli_fetch_array($result))) {
 					$css = (!isset($css) || $css == "odd") ? "even" : "odd"; ?>
 					<tr class="<?= $css ?>_row"><td class="<?= $css ?>file"><?= id(new User($row))->htmlUsername() ?></td></tr>
 				<? }
@@ -467,7 +467,7 @@ $timelimit = 10;
 		$result = tmbo_query($sql);
 		
 		$watchers = array();
-		while(false !== ($row = mysql_fetch_array($result))) {
+		while(null !== ($row = mysqli_fetch_array($result))) {
 			$watcher = new User($row);
 			if(!me()->squelched($watcher)) {
 				$watchers[] = $watcher;

@@ -1117,7 +1117,7 @@ function upload_largerthan($postdata, $bytes) {
 
 ###############################################################################
 function upload_insert_file($postdata) {
-	global $tmpdir;
+	global $tmpdir, $link;
 
 	// it's possible (it's happened in the past!) for the time in sql to differ from PHP
 	// use the SQL server's time as the trusted source
@@ -1146,7 +1146,7 @@ function upload_insert_file($postdata) {
 			                $nsfw, $tmbo, '".$postdata['hash']."', '" .
 			                upload_type( $postdata ) . "', 'pending')";
 	tmbo_query($sql);
-	$fileid = mysqli_insert_id();
+	$fileid = mysqli_insert_id($link);
 
 	ensureDirExists("$path");
 

@@ -305,7 +305,7 @@ class Upload {
 			        WHERE u.userid = com.userid AND fileid = ".$this->data["id"].
 			       " ORDER BY timestamp ASC";
 			$result = tmbo_query($sql);
-			while(false !== ($row = mysqli_fetch_assoc($result))) {
+			while(null !== ($row = mysqli_fetch_assoc($result))) {
 				$this->data["thecomments"][] = new Comment($row);
 			}
 		}
