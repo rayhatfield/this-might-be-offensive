@@ -18,7 +18,7 @@ abstract class Asset {
 	public static function idFor($filename){ if(is_null(self::$ids)) self::initIds(); foreach(self::$ids as $id => $file) { if($file == $filename) return $id; } return false; }
 	public static function assetFor($id){
 		if(is_null(self::$ids)) self::initIds();
-		assert('is_numeric($id)');
+		assert(is_numeric($id));
 		if($id >= count(self::$ids) || $id < 0) trigger_error("id out of range", E_USER_ERROR);
 		return new AssetFile(self::$ids[$id]);
 	}
@@ -76,7 +76,7 @@ class AssetCollection extends Asset {
 	
 	// addition
 	public function add(AssetFile $asset) {
-		assert('$asset->file() != ""');
+		assert($asset->file() != "");
 		$this->assets[] = $asset;
 	}
 	
@@ -87,7 +87,7 @@ class AssetCollection extends Asset {
 		}
 		$files = array();
 		foreach($this->assets as $asset) {
-			assert('$asset->useminifile()');
+			assert($asset->useminifile());
 			$files[] = base_convert($asset->id(), 10, 36);
 		}
 		return self::$coalescer.implode(":", $files);

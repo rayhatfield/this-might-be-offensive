@@ -133,7 +133,7 @@ class User {
 		   !is_object($this->data["token"])) {
 			$this->data["token"] = new Token($this->data["token"]);
 		} else {
-			assert('me()->id() == $this->id()');
+			assert(me()->id() == $this->id());
 			$this->data["token"] = new Token();
 		}
 		return $this->data["token"];
@@ -223,8 +223,8 @@ class User {
 		|| !array_key_exists("squelched_by", $this->data)) {
 
 			// data consistency
-			assert('!array_key_exists("squelched", $this->data)');
-			assert('!array_key_exists("squelched_by", $this->data)');
+			assert(!array_key_exists("squelched", $this->data));
+			assert(!array_key_exists("squelched_by", $this->data));
 			$this->data["squelched"] = array();
 			$this->data["squelched_by"] = array();
 

@@ -172,7 +172,7 @@ function login($methods=array()) {
 	}
 	$login_called = true;
 	
-	assert('is_array($methods)');
+	assert(is_array($methods));
 	global $login_message;
 
 	// session login is always allowed!

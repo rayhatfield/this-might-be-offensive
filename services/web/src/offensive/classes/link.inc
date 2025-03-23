@@ -35,7 +35,7 @@ class Link {
 	
 	// pagination links (search query_string)
 	static function content($page) {
-		assert('is_string($page)');
+		assert(is_string($page));
 		return "/offensive/?c=$page";
 	}
 
@@ -84,13 +84,13 @@ class Link {
 		if(!is_object($upload)) {
 			$upload = new Upload($upload);
 		}
-		assert('$upload->type() != "topic"');
+		assert($upload->type() != "topic");
 
 		return $upload->URL();
 	}
 
 	static function rss($type) {
-		assert('in_array($type, array("audio", "zip", "pic", "discuss"))');
+		assert(in_array($type, array("audio", "zip", "pic", "discuss")));
         $token = new Token(" rss");
 
 		return "/offensive/".$type."_rss.php?token=".$token->tokenid();

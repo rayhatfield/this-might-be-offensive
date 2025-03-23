@@ -37,7 +37,7 @@ class Token {
 				/*
 				 * get a token by application
 				 */
-				assert('me()');
+				assert(me());
 				if(!array_key_exists("app:$info", self::$gdata)) {
 					self::$gdata["app:$info"] = array("userid" => me()->id(), "issued_to" => $info);
 				}
@@ -63,8 +63,8 @@ class Token {
 			if(array_key_exists("tokenid", $this->data)) {
 				$sql = "SELECT * FROM tokens WHERE tokenid = \"".sqlEscape($this->data["tokenid"])."\"";
 			} else {
-				assert('array_key_exists("userid", $this->data)');
-				assert('array_key_exists("issued_to", $this->data)');
+				assert(array_key_exists("userid", $this->data));
+				assert(array_key_exists("issued_to", $this->data));
 				$sql = "SELECT * FROM tokens WHERE issued_to = \"".sqlEscape($this->data["issued_to"])."\" AND userid = ".$this->data["userid"];
 			}
 			$result = tmbo_query($sql);
@@ -73,7 +73,7 @@ class Token {
 			if(mysqli_num_rows($result) != 1) {
 				// there should never be more than one result for a token that matches either
 				// query of "userid issued by ' tmbo'" or "tokenid".
-				assert('mysqli_num_rows($result) == 0');
+				assert(mysqli_num_rows($result) == 0);
 				if(!array_key_exists("tokenid", $this->data) &&
 				   array_key_exists("userid", $this->data) &&
 				   array_key_exists("issued_to", $this->data)) {
