@@ -171,7 +171,7 @@
 							$sql = "SELECT count(*) as thecount FROM users
 										WHERE referred_by=$usrid AND userid != $usrid";
 							$res = tmbo_query( $sql );
-							list( $possecount ) = mysql_fetch_array( $res );
+							list( $possecount ) = mysqli_fetch_array( $res );
 							
 							if( $possecount > 0 ) {
 							
@@ -313,7 +313,7 @@ function votingRecord( $id, $name ) {
 	
 	$sql = "SELECT COUNT(*) FROM offensive_comments WHERE userid = $id";
 	$result = tmbo_query( $sql );
-	$comments = mysql_fetch_row($result);
+	$comments = mysqli_fetch_row($result);
 	$comments = $comments[0];
 
 	if($comments > 1000) {
@@ -321,12 +321,12 @@ function votingRecord( $id, $name ) {
 	} else {
 		$sql = "SELECT COUNT(*) FROM offensive_comments WHERE userid = $id AND vote = 'this is good'";
 		$result = tmbo_query( $sql );
-		$good = mysql_fetch_row($result);
+		$good = mysqli_fetch_row($result);
 		$good = $good[0];
 		
 		$sql = "SELECT COUNT(*) FROM offensive_comments WHERE userid = $id AND vote = 'this is bad'";
 		$result = tmbo_query( $sql );
-		$bad = mysql_fetch_row($result);
+		$bad = mysqli_fetch_row($result);
 		$bad = $bad[0];
 		
 		?><div class="piletitle" style="margin-bottom:12px;"><?echo $name ?>'s voting record: +<?= $good ?> -<?= $bad ?><?

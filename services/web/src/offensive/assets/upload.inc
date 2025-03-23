@@ -1123,7 +1123,7 @@ function upload_insert_file($postdata) {
 	// use the SQL server's time as the trusted source
 	$sql = "SELECT NOW()";
 	$res = tmbo_query($sql);
-	list($now) = mysql_fetch_array($res);
+	list($now) = mysqli_fetch_array($res);
 
 	// basePath()
 	$timestamp = strtotime($now);
@@ -1146,7 +1146,7 @@ function upload_insert_file($postdata) {
 			                $nsfw, $tmbo, '".$postdata['hash']."', '" .
 			                upload_type( $postdata ) . "', 'pending')";
 	tmbo_query($sql);
-	$fileid = mysql_insert_id();
+	$fileid = mysqli_insert_id();
 
 	ensureDirExists("$path");
 

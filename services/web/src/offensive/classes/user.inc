@@ -231,7 +231,7 @@ class User {
 			$sql = "SELECT userid,squelched FROM offensive_squelch WHERE userid=".$this->id()." OR squelched=".$this->id();
 			$result = tmbo_query($sql);
 
-			while($row = mysql_fetch_array($result)) {
+			while($row = mysqli_fetch_array($result)) {
 				if($row["userid"] == $this->id()) {
 					$this->data["squelched"][] = $row["squelched"];
 				} else {
