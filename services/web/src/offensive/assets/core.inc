@@ -538,11 +538,15 @@
 		if(!$offensive) $offensive = 0;
 		updateCommentCount($fileid, $good_count, $bad_count, $repost, $offensive, $comment_count);
 
+		$v = $vote == '' ? 'NULL' : "'".sqlEscape($vote)."'";
+
 		// add the comment to the database
 		$sql = "INSERT INTO offensive_comments ( userid, fileid, comment, vote, offensive, repost, user_ip ) 
-		        VALUES ( $userid, $fileid, '$comment', '$vote', $offensive, $repost, '".sqlEscape($_SERVER['REMOTE_ADDR'])."')";
+		        VALUES ( $userid, $fileid, '$comment', $v, $offensive, $repost, '".sqlEscape($_SERVER['REMOTE_ADDR'])."')";
+
+		var_dump($sql);
 		tmbo_query($sql);
-		$commentid = mysql_insert_id();
+		$commentid = mysqli_insert_id($link);
 
 		if($comment) {
 			// update subscriptions

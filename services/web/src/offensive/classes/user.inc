@@ -449,6 +449,7 @@ class User {
 	}
 
 	public function clearSubscription($upload) {
+		global $link;
 		if(TMBO::readonly()) return false;
 
 		if(is_numeric($upload)) $upload = new Upload($upload);
@@ -457,7 +458,7 @@ class User {
 		$sql = "UPDATE offensive_subscriptions SET commentid = NULL WHERE userid={$this->id()} and fileid={$upload->id()}";
 		$result = tmbo_query( $sql );
 
-		if(mysql_affected_rows() < 1) {
+		if(mysqli_affected_rows($link) < 1) {
 			return false;
 		}
 
