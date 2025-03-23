@@ -27,6 +27,11 @@ services:
     volumes:
       - ./temp/mysql:/var/lib/mysql
       - ./data/db-setup:/docker-entrypoint-initdb.d
+  redis:
+    image: redis
+    container_name: redis
+    ports:
+      - "6379:6379"
   # web:
   #   image: php:7.2-apache
   #   ports:

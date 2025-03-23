@@ -33,9 +33,13 @@ function openDbConnection() {
 		}
 		
 		// Overloading this into the db connect since the combination is our "database"
-		// if(!$redis) {
-		// 	$redis = new Predis\Client();
-		// }
-		return $link;		
+		if(!$redis) {
+			$redis = new Predis\Client([
+				'scheme' => 'tcp',
+				'host'   => 'redis',
+				'port'   => 6379,
+			]);
+		}
+		return $link;
 }
 ?>
