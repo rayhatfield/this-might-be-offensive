@@ -345,7 +345,7 @@
 			$sql .= " AND com.vote = 'this is bad'";
 		}
 		if(strpos($votefilter, "0") !== false) {
-			$sql .= " AND com.vote = ''";
+			$sql .= " AND com.vote IS NULL";
 		}
 		if(strpos($votefilter, "x") !== false) {
 			$sql .= " AND com.offensive = 1";
