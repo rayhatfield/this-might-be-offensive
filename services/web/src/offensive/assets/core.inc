@@ -457,6 +457,7 @@
 	}
 
 	function core_postcomment($args) {
+		global $link;
 		$fileid = check_arg("fileid", "integer", $args);
 		$comment = check_arg("comment", "string", $args, false);
 		$vote = check_arg("vote", "string", $args, false, array("this is good", "this is bad", "novote"));
@@ -544,7 +545,6 @@
 		$sql = "INSERT INTO offensive_comments ( userid, fileid, comment, vote, offensive, repost, user_ip ) 
 		        VALUES ( $userid, $fileid, '$comment', $v, $offensive, $repost, '".sqlEscape($_SERVER['REMOTE_ADDR'])."')";
 
-		var_dump($sql);
 		tmbo_query($sql);
 		$commentid = mysqli_insert_id($link);
 
