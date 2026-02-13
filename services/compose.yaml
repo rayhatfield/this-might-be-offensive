@@ -4,8 +4,10 @@ services:
     container_name: nginx
     ports:
       - 80:80
+      - 443:443
     volumes:
       - ./web/src/:/var/www/html
+      - nginx-certs:/etc/nginx/certs
   php:
     build: ./web/
     container_name: php
@@ -40,3 +42,6 @@ services:
   #     - ./web:/var/www/html
   #   depends_on:
   #     - mysql
+
+volumes:
+  nginx-certs:
