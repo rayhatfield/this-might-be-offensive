@@ -174,7 +174,7 @@ ORDER BY offensive_uploads.timestamp DESC, offensive_uploads.id DESC
 LIMIT $page_limit_clause, 15";
 
 $result = tmbo_query($sql);
-while( $image = mysql_fetch_assoc( $result ) ) 
+while( $image = mysqli_fetch_assoc( $result ) )
 {
 	$upload = new Upload($image);
 	$filepath = $upload->file();
@@ -231,11 +231,11 @@ echo $info[0]."x".$info[1];
 				ORDER BY comment_timestamp";
 	
 	$res = tmbo_query( $sql );
-	$rows = mysql_num_rows($res);
+	$rows = mysqli_num_rows($res);
 	$op = 0;
 	$fetch = 0;
 
-	$comment = mysql_fetch_assoc($res);
+	$comment = mysqli_fetch_assoc($res);
 	++$fetch;
 	if($comment['userid'] == $upload->uploader()->id()) {
 		$op = 1;
@@ -250,14 +250,14 @@ echo $info[0]."x".$info[1];
 	}
 
 	if($op == 1) {
-		if(!($comment = mysql_fetch_assoc($res))) {
+		if(!($comment = mysqli_fetch_assoc($res))) {
 			$comment = false;
 		}
 		++$fetch;
 	}
 
 	while($fetch <= $rows - 3) {
-		$comment = mysql_fetch_assoc($res);
+		$comment = mysqli_fetch_assoc($res);
 		++$fetch;
 	}
 
@@ -270,7 +270,7 @@ echo $info[0]."x".$info[1];
 	<tr>
 		<td nowrap class="doubledash">&gt;&gt;</td>
 		<td id="<?= $comment['commentid'] ?>" class="reply">
-			<span class="replytitle"></span> 
+			<span class="replytitle"></span>
 			<span class="commentpostername"><?= $comment['username'] ?></span>&nbsp;<?=
 			date("m/d/y(D)H:i:s", strtotime($comment['comment_timestamp']));
 			?><span></span>
@@ -284,7 +284,7 @@ echo $info[0]."x".$info[1];
 
 <?
 	++$fetch;
-	} while($comment = mysql_fetch_assoc($res));
+	} while($comment = mysqli_fetch_assoc($res));
 ?>
 
 <!-- /if -->

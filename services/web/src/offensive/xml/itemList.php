@@ -32,7 +32,7 @@ header( "Content-type: text/xml" ); ?>
 			ORDER BY offensive_uploads.timestamp DESC
 			LIMIT $startNum, $numItems";
 
-	$result = mysql_query( $sql );
+	$result = mysqli_query( $link, $sql );
 
 	while( $row = mysqli_fetch_assoc( $result ) ) {
 	

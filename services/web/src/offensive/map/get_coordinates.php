@@ -115,7 +115,7 @@ foreach($clusters as $index => $cluster) {
 echo json_encode($data);
 
 function sql_get_markers($max_marker_level) {
-	global $filter;
+	global $filter, $link;
 	$markers = array();
 
 	$query = "SELECT map.userid, u.username,
@@ -124,9 +124,9 @@ function sql_get_markers($max_marker_level) {
 						WHERE map.mapversion = 'google' AND map.userid = u.userid $filter
 						ORDER BY u.username";
 
-	$result = mysql_query($query);
+	$result = mysqli_query($link, $query);
 	if (!$result) {
-	    die('Invalid query: ' . mysql_error());
+	    die('Invalid query: ' . mysqli_error($link));
 	}
 
 	while ($row = @mysqli_fetch_assoc($result)) {
@@ -140,7 +140,7 @@ function sql_get_markers($max_marker_level) {
 
 
 function sql_get_markers_at_zoom($level) {
-	global $filter;
+	global $filter, $link;
 
 	$sql = "SELECT map.userid, u.username,
 	               MIN(map.x) as swx, MIN(map.y) as swy,
@@ -153,11 +153,11 @@ function sql_get_markers_at_zoom($level) {
 	        GROUP BY fuzzy_lat, fuzzy_lon ORDER BY num_users DESC";
 
 	$markers = array();
-	$result = mysql_query($sql);
+	$result = mysqli_query($link, $sql);
 	if (!$result) {
-	    die('Invalid query: ' . mysql_error());
+	    die('Invalid query: ' . mysqli_error($link));
 	}
-	while ($row = @mysql_fetch_array($result)) {
+	while ($row = @mysqli_fetch_array($result)) {
 		if(!me()->squelched($row["userid"])) {
 	    array_push($markers,$row);
 		}

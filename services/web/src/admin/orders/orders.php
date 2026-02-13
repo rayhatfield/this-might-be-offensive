@@ -5,7 +5,7 @@
 	if( $_REQUEST['action'] == "shipped" ) {
 		$orderid = $_REQUEST['orderid'];
 		$sql = "UPDATE merch_orders set status='shipped' WHERE id=$orderid LIMIT 1";
-		mysql_query( $sql );
+		mysqli_query( $link, $sql );
 		header( "Location: " . $_SERVER['PHP_SELF'] );		
 	}
 
@@ -73,9 +73,9 @@
 
 		$sql .=	" GROUP BY order_id";
 	
-		$result = mysql_query( $sql ) ;
+		$result = mysqli_query( $link, $sql ) ;
 	
-		while( $row = mysql_fetch_assoc( $result ) ) {
+		while( $row = mysqli_fetch_assoc( $result ) ) {
 	?>
 			<tr class="<? echo $row['status'] ?>">
 				<td><? echo $row['orderid'] ?></td>

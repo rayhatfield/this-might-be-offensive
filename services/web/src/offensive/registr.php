@@ -122,7 +122,7 @@
 			
 			/* this query not changed to tmbo_query
 			 * because it should be non-fatal if the query fails. */
-			mysqli_query( $link, "DELETE FROM referrals WHERE referral_code = '$referral' AND userid=$referrerId LIMIT 1" ) or trigger_error(mysql_error(), E_USER_WARNING);
+			mysqli_query( $link, "DELETE FROM referrals WHERE referral_code = '$referral' AND userid=$referrerId LIMIT 1" ) or trigger_error(mysqli_error($link), E_USER_WARNING);
 #			mail( "ray@mysocalled.com", "[" . $_SERVER["REMOTE_ADDR"] . "] - [ this might be offensive ] account created: $uName", $_POST['email'], "From: offensive@thismight.be (this might be offensive)");
 		} else {
 		 	$returnMessage = "The username you've chosen, \"" . $uName . "\", is not available.";

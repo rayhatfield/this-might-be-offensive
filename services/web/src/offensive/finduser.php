@@ -9,7 +9,7 @@
 	$sql = "SELECT userid FROM users WHERE username LIKE '" . sqlEscape($_REQUEST['finduser']) . "'";
 
 	$result = tmbo_query($sql);
-	$row = mysql_fetch_array( $result );
+	$row = mysqli_fetch_array( $result );
 
 	if( mysqli_num_rows( $result ) == 1 ) {
 		header("Location: ".Link::user($row['userid']));

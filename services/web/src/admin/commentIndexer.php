@@ -14,7 +14,7 @@ set_include_path("/home/thismightbe/sites/tmbo");
  ***********/
 function tmbo_query($sql, $timeout=2) {
     global $link;
-    return mysql_query($sql, $link);
+    return mysqli_query($link, $sql);
 }
 function is_intger($arg) {
        return (is_numeric($arg) && floor($arg) == ceil($arg));
@@ -102,7 +102,7 @@ try {
 		       ." ORDER BY id ASC";
 		$res = tmbo_query($sql);
 		
-		while($row = mysql_fetch_assoc($res)) {
+		while($row = mysqli_fetch_assoc($res)) {
 			// update the last comment we've seen
 			$lastc = $row["id"];
 			
@@ -157,7 +157,8 @@ function index_comment($database, $indexer, $row) {
 
 function getsingle($sql) {
 	$res = @tmbo_query($sql);
-	return mysql_result($res, 0);
+	$row = mysqli_fetch_row($res);
+	return $row ? $row[0] : null;
 }
 
 function rmr($dir)
